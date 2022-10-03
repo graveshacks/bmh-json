@@ -47,4 +47,4 @@ if __name__ == "__main__":
     new_data = {"Pattern": p, "BMH Shift table": skip}
     # write_json(new_data)
     t = bmh(m, n,skip)
-    print(t)
+    print(t+1)
