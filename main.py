@@ -13,22 +13,22 @@ def shift_table(m, n):
         return -1
     shift = []
     for k in range(256):
-        shift.append(m)
-    for k in range(m - 1):
-        shift[ord(s[k])] = m - k - 1
+        shift.append(n)
+    for k in range(n - 1):
+        shift[ord(p[k])] = n - k - 1
     shift = tuple(shift)  # shift table created
     return shift
 # m = len of main string, n = len of pattern string
-def bmh(m, n):
+def bmh(m, n,skip):
     k = n - 1
     while k < m:
         j = n - 1; i = k
         while j >= 0 and s[i] == p[j]:
             j -= 1; i -= 1
-        if j == -1: 
-            return i + 1
+            if j == -1: 
+                return i + 1
         k += skip[ord(s[k])]
-    return -1
+    return -1 #error here
 
 def write_json(new_data, filename = 'json_data.json'):
     with open(filename, 'r+') as f:
@@ -40,12 +40,11 @@ def write_json(new_data, filename = 'json_data.json'):
 if __name__ == "__main__":
     s = "The policy number is 5641-236-erk"
     m = len(s)
-    p = "5"
+    p = "56"
     n = len(p)
     skip = shift_table(m, n)
     print(skip)
     new_data = {"Pattern": p, "BMH Shift table": skip}
     # write_json(new_data)
-    t = bmh(m, n)
-    if t > -1:
-        print(t)
+    t = bmh(m, n,skip)
+    print(t)
